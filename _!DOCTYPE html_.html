@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Satisfacción del Cliente BIO-TEKAX</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        h2, h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .question {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .options label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        #results-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #e9ecef;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Encuesta de Satisfacción del Cliente BIO-TEKAX</h2>
+
+        <div id="client-info">
+            <h3>Información del Cliente</h3>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa" required>
+            </div>
+            <button onclick="mostrarEncuesta()">Iniciar Encuesta</button>
+            <div id="error-message" style="display: none;">Por favor, complete la información del cliente.</div>
+        </div>
+
+        <div id="survey-form" style="display: none;">
+            <form id="survey">
+                <h3>Sección: Oferta-cotización (30%)</h3>
+                <div class="question">
+                    <label>¿Cómo calificaría nuestro tiempo de respuesta?</label>
+                    <div class="options">
+                        <label><input type="radio" name="oferta_tiempo_respuesta" value="5" required> Muy Satisfecho</label>
+                        <label><input type="radio" name="oferta_tiempo_respuesta" value="4" required> Satisfecho</label>
+                        <label><input type="radio" name="oferta_tiempo_respuesta" value="3" required> Neutral</label>
+                        <label><input type="radio" name="oferta_tiempo_respuesta" value="2" required> Poco Satisfecho</label>
+                        <label><input type="radio" name="oferta_tiempo_respuesta" value="1" required> Nada Satisfecho</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿La información recibida fue clara?</label>
+                    <div class="options">
+                        <label><input type="radio" name="oferta_informacion_clara" value="5" required> Muy Satisfecho</label>
+                        <label><input type="radio" name="oferta_informacion_clara" value="4" required> Satisfecho</label>
+                        <label><input type="radio" name="oferta_informacion_clara" value="3" required> Neutral</label>
+                        <label><input type="radio" name="oferta_informacion_clara" value="2" required> Poco Satisfecho</label>
+                        <label><input type="radio" name="oferta_informacion_clara" value="1" required> Nada Satisfecho</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿La cotización cubrió sus necesidades?</label>
+                    <div class="options">
+                        <label><input type="radio" name="oferta_cotizacion_necesidades" value="5" required> Totalmente</label>
+                        <label><input type="radio" name="oferta_cotizacion_necesidades" value="4" required> En gran medida</label>
+                        <label><input type="radio" name="oferta_cotizacion_necesidades" value="3" required> Parcialmente</label>
+                        <label><input type="radio" name="oferta_cotizacion_necesidades" value="2" required> Poco</label>
+                        <label><input type="radio" name="oferta_cotizacion_necesidades" value="1" required> Nada</label>
+                    </div>
+                </div>
+
+                <h3>Sección: Atributos de calidad (40%)</h3>
+                <div class="question">
+                    <label>¿Cómo califica el tiempo de entrega de resultados?</label>
+                    <div class="options">
+                        <label><input type="radio" name="calidad_tiempo_entrega" value="5" required> Muy Satisfecho</label>
+                        <label><input type="radio" name="calidad_tiempo_entrega" value="4" required> Satisfecho</label>
+                        <label><input type="radio" name="calidad_tiempo_entrega" value="3" required> Neutral</label>
+                        <label><input type="radio" name="calidad_tiempo_entrega" value="2" required> Poco Satisfecho</label>
+                        <label><input type="radio" name="calidad_tiempo_entrega" value="1" required> Nada Satisfecho</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Los informes de resultados son de fácil interpretación?</label>
+                    <div class="options">
+                        <label><input type="radio" name="calidad_informes_claros" value="5" required> Totalmente</label>
+                        <label><input type="radio" name="calidad_informes_claros" value="4" required> Fácilmente</label>
+                        <label><input type="radio" name="calidad_informes_claros" value="3" required> Moderadamente</label>
+                        <label><input type="radio" name="calidad_informes_claros" value="2" required> Con dificultad</label>
+                        <label><input type="radio" name="calidad_informes_claros" value="1" required> Muy difícil</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Considera que los resultados son confiables?</label>
+                    <div class="options">
+                        <label><input type="radio" name="calidad_resultados_confiables" value="5" required> Totalmente de acuerdo</label>
+                        <label><input type="radio" name="calidad_resultados_confiables" value="4" required> De acuerdo</label>
+                        <label><input type="radio" name="calidad_resultados_confiables" value="3" required> Neutral</label>
+                        <label><input type="radio" name="calidad_resultados_confiables" value="2" required> En desacuerdo</label>
+                        <label><input type="radio" name="calidad_resultados_confiables" value="1" required> Totalmente en desacuerdo</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Cómo calificaría su grado de satisfacción?</label>
+                    <div class="options">
+                        <label><input type="radio" name="calidad_grado_satisfaccion" value="5" required> Muy Satisfecho</label>
+                        <label><input type="radio" name="calidad_grado_satisfaccion" value="4" required> Satisfecho</label>
+                        <label><input type="radio" name="calidad_grado_satisfaccion" value="3" required> Neutral</label>
+                        <label><input type="radio" name="calidad_grado_satisfaccion" value="2" required> Poco Satisfecho</label>
+                        <label><input type="radio" name="calidad_grado_satisfaccion" value="1" required> Nada Satisfecho</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿En comparación con otros laboratorios BIO-TEKAX es?</label>
+                    <div class="options">
+                        <label><input type="radio" name="calidad_comparacion" value="5" required> Mucho mejor</label>
+                        <label><input type="radio" name="calidad_comparacion" value="4" required> Mejor</label>
+                        <label><input type="radio" name="calidad_comparacion" value="3" required> Igual</label>
+                        <label><input type="radio" name="calidad_comparacion" value="2" required> Peor</label>
+                        <label><input type="radio" name="calidad_comparacion" value="1" required> Mucho peor</label>
+                    </div>
+                </div>
+
+                <h3>Sección: Atención a clientes (30%)</h3>
+                <div class="question">
+                    <label>¿Cómo calificaría la atención del personal?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_calificacion_personal" value="5" required> Excelente</label>
+                        <label><input type="radio" name="atencion_calificacion_personal" value="4" required> Buena</label>
+                        <label><input type="radio" name="atencion_calificacion_personal" value="3" required> Regular</label>
+                        <label><input type="radio" name="atencion_calificacion_personal" value="2" required> Mala</label>
+                        <label><input type="radio" name="atencion_calificacion_personal" value="1" required> Muy mala</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Fue atendida de manera oportuna su solicitud?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_oportuna_solicitud" value="5" required> Sí, inmediatamente</label>
+                        <label><input type="radio" name="atencion_oportuna_solicitud" value="4" required> Sí, rápidamente</label>
+                        <label><input type="radio" name="atencion_oportuna_solicitud" value="3" required> Sí, con demora</label>
+                        <label><input type="radio" name="atencion_oportuna_solicitud" value="2" required> No, con demora</label>
+                        <label><input type="radio" name="atencion_oportuna_solicitud" value="1" required> No fui atendido</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Cómo calificaría la relación costo/beneficio?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_costo_beneficio" value="5" required> Excelente</label>
+                        <label><input type="radio" name="atencion_costo_beneficio" value="4" required> Buena</label>
+                        <label><input type="radio" name="atencion_costo_beneficio" value="3" required> Regular</label>
+                        <label><input type="radio" name="atencion_costo_beneficio" value="2" required> Mala</label>
+                        <label><input type="radio" name="atencion_costo_beneficio" value="1" required> Muy mala</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Cómo fue el servicio postventa?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_servicio_postventa" value="5" required> Muy bueno</label>
+                        <label><input type="radio" name="atencion_servicio_postventa" value="4" required> Bueno</label>
+                        <label><input type="radio" name="atencion_servicio_postventa" value="3" required> Regular</label>
+                        <label><input type="radio" name="atencion_servicio_postventa" value="2" required> Malo</label>
+                        <label><input type="radio" name="atencion_servicio_postventa" value="1" required> Muy malo</label>
+                        <label><input type="radio" name="atencion_servicio_postventa" value="0" required> No lo utilicé</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Cuándo solicitó ayuda, fue atendido de manera adecuada?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_ayuda_adecuada" value="5" required> Sí, totalmente</label>
+                        <label><input type="radio" name="atencion_ayuda_adecuada" value="4" required> Sí, en gran medida</label>
+                        <label><input type="radio" name="atencion_ayuda_adecuada" value="3" required> Parcialmente</label>
+                        <label><input type="radio" name="atencion_ayuda_adecuada" value="2" required> No, no fue adecuada</label>
+                        <label><input type="radio" name="atencion_ayuda_adecuada" value="1" required> No recibí ayuda</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>¿Recomendaría nuestros servicios a otra empresa?</label>
+                    <div class="options">
+                        <label><input type="radio" name="atencion_recomendacion" value="5" required> Definitivamente sí</label>
+                        <label><input type="radio" name="atencion_recomendacion" value="4" required> Probablemente sí</label>
+                        <label><input type="radio" name="atencion_recomendacion" value="3" required> Tal vez</label>
+                        <label><input type="radio" name="atencion_recomendacion" value="2" required> Probablemente no</label>
+                        <label><input type="radio" name="atencion_recomendacion" value="1" required> Definitivamente no</label>
+                    </div>
+                </div>
+
+                <h3>Sección: Opinión del cliente</h3>
+                <div class="form-group">
+                    <label for="opinion">¿Tiene algún comentario o sugerencia adicional?</label>
+                    <textarea id="opinion" rows="4" style="width: calc(100% - 12px); padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                </div>
+
+                <button type="button" onclick="enviarEncuesta()">Enviar Encuesta</button>
+            </form>
+        </div>
+
+        <div id="results-container" style="display: none;">
+            <h3>Gracias por su participación</h3>
+            <p>Sus respuestas han sido enviadas.</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarEncuesta() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const empresa = document.getElementById('empresa').value.trim();
+            const clientInfoDiv = document.getElementById('client-info');
+            const surveyFormDiv = document.getElementById('survey-form');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            if (nombre !== '' && empresa !== '') {
+                clientInfoDiv.style.display = 'none';
+                surveyFormDiv.style.display = 'block';
+                errorMessageDiv.style.display = 'none';
+            } else {
+                errorMessageDiv.style
